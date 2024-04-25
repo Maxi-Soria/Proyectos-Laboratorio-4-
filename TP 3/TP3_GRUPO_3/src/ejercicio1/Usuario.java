@@ -9,38 +9,50 @@ public class Usuario {
 	{
 		
 	}
-	
+		
+    public String getNombredeusuario() {
+		return nombredeusuario;
+	}
 
-    public static boolean verificarUsuarioInvalido(String nombreUsuario) throws UsuarioInvalidoException 
+	public void setNombredeusuario(String nombredeusuario) {
+		this.nombredeusuario = nombredeusuario;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public static void verificarUsuarioInvalido(String nombreUsuario) throws UsuarioInvalidoException 
     {
         Boolean hayNumero = false;
         Boolean hayMayuscula = false;
-        Boolean hay10Caracters = false;
 
-        if (nombreUsuario.length() > 9) {
-        	 hay10Caracters = true;
 
+        if (nombreUsuario.length() < 10)
+        {
+        	UsuarioInvalidoException exc = new UsuarioInvalidoException();
+        	 throw exc;
         }
         
-        for (char c : nombreUsuario.toCharArray()) {
-            if (Character.isDigit(c)) {
+        for ( char c : nombreUsuario.toCharArray() ) 
+        {
+        	
+            if ( Character.isDigit(c) )
+            {
                 hayNumero = true;
             }
-            if (Character.isUpperCase(c)) {
+            if ( Character.isUpperCase(c) )
+            {
                 hayMayuscula = true;
             }
         }
 
-        if (!hayNumero || !hayMayuscula || !hay10Caracters) {
+        if ( !hayNumero || !hayMayuscula )
+        {
             UsuarioInvalidoException exc1 = new  UsuarioInvalidoException();
             throw exc1;
         }
-        
-        
-        return hayNumero && hayMayuscula && hay10Caracters;
-        
-        
-        
-    }
-		
+          
+    }	
+	
 }
